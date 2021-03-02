@@ -51,8 +51,63 @@
 * 웹 브라우저로 사이트를 요청하면 HTML 뿐만 아니라 자바스크립트, css 추가 이미지 등 수많은 자원이 함께 다운로드
 * 지금은 HTTP 지속연결(persistent connections)로 문제 해결
 	* 서버와 클라이언트 간에 하나의 TCP/IP 연결을 통해 여러개의 Object 전송 
-	* HTTP 1.1 에서부터 사용.
+	* HTTP 1.1 에서부터 사용
 * HTTP/2, HTTP/3에서 더 많은 최적화 
+
+
+# HTTP 메시지 
+
+* HTTP 메시지 구조 
+	* start-line 시작라인
+	* header 헤더
+	* empty line 공백라인 (CRLF)
+	* message body
+
+* HTTP 요청 메시지 예시 
+	* GET /search?q=hello&h1=ko HTTP/1.1			(start-line)
+	* Host: www.google.com 							(header 헤더)
+	* 												(공백라인)
+	*												(message body)
+
+* HTTP 응답 메시지 
+	* HTTP/1.1 200 OK								(start-line)
+	* Content-type: text/html;charset=UTF-8			(header 헤더)
+	* Content-Length: 3423							(header 헤더)
+	* 												(공백라인)
+	* <html><body></body></html>					(message body)
+
+
+### 시작 라인 
+
+* 요청 메시지 
+	* start-line = request-line
+	* GET /search?q=hello&h1=ko HTTP/1.1
+		* HTTP 메서드 (GET, POST, DELETE, PUT)
+		* 요청 대상 (/search?q=hello&h1=ko) : /절대경로?쿼리 
+		* HTTP Version
+
+* 응답 메시지 
+	* start-line = status-line
+	* HTTP/1.1 200 OK
+		* HTTP 버전
+		* HTTP 상태코드 : 요청 성공, 실패를 나타냄
+			* 200 : 성공
+			* 400 : 클라이언트 요청 오류
+			* 500 : 서버 내부 오류
+
+
+### HTTP 헤더 
+
+* HTTP 전송에 필요한 모든 부가 정보
+	* 예) 메시지 바디의 내용, 메시지 바디의 크기, 압축, 인증, 요청 클라이어늩 정보, 서버 애플리케이션 정보, 캐시 관리 정보
+* 표준 헤더가 너무 많음.
+* 필요 시 임의의 헤더 추가 가능 
+
+### HTTP 메시지 바디
+
+* 실제 전송할 데이터 
+* HTML 문서, 이미지, 영상, JSON 등등  byte로 표현할 수 있는 모든 데이터 전송 가능
+	
 
 
 
